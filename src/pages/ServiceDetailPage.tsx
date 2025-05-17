@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import ServicePage from './ServicePage';
 
 interface ServiceDetails {
@@ -185,12 +186,9 @@ const serviceDetails: ServiceDetails = {
   }
 };
 
-interface ServiceDetailPageProps {
-  service: string;
-}
-
-const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service }) => {
-  const details = serviceDetails[service];
+const ServiceDetailPage: React.FC = () => {
+  const { service } = useParams<{ service: string }>();
+  const details = service ? serviceDetails[service] : null;
   
   if (!details) {
     return (
